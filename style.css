@@ -194,4 +194,27 @@ body {
       margin-bottom: 20px;
     }
   }
+
+  .css-validator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+  }
+  
+  .css-validator-container a {
+    margin: 0 10px; /* Adds space between the badges */
+  }
+  
+  .css-validator-container img {
+    border: none;
+    transition: transform 0.3s ease;
+  }
+  
+  .css-validator-container img:hover {
+    transform: scale(1.1);
+  }
+  
+  
   
