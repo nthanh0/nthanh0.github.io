@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/muonsach.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css'>
+    <title>Quản lý kho sách</title>
+</head>
+<body>  
+    <div id="sidebar"> 
+        <div class="logo">
+            <img src="./images/logo.jpg" alt="Library logo"/>
+            <p>MY LIBRARY</p>
+        </div>   
+        <ul>
+            <li><a href="#" class="quan-ly-kho-sach">Quản lý kho sách
+            </a></li>
+            <li><a href="#" class="quan-ly-doc-gia">Quản lý độc giả
+            </a></li>
+            <li><a href="#" class="quan-ly-muon-tra" id="current-page">Quản lý mượn / trả sách
+            </a></li>
+            <li><a href="#" class="quan-ly-thong-ke">Quản lý thống kê
+            </a></li>
+        </ul>
+        <div class="exit">
+            <a href="">
+                <i class="bi bi-box-arrow-left"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                </svg>
+                <p>Thoát</p>
+            </a>
+        </div>
+    </div>  
+    <main>       
+        <div class="header">
+            <button type="button" class="toggleButton" onclick="toggleMenu()">
+                <i class="bi bi-list"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </button>
+            <div class="time">
+                <p id="time"></p>
+            </div>
+            <div class="log-out">
+                <a href="login.html">Đăng xuất
+                    <i class="bi bi-box-arrow-left"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                        <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                    </svg>   
+                </a>
+            </div>
+            <img src="./images/avatar.jpg" alt="Avatar">
+        </div> 
+        <div class="content">
+            <h1>Quản lý mượn trả sách</h1>
+            <div class="table-group">
+                <div class="table-interactions">
+                    <input type="text" id="searchBar" placeholder="Tìm kiếm">
+                    <button class="toggleable-button">Đã quá hạn</button>
+                    <button>Lịch sử mượn</button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Người mượn</th>
+                                <th>Sách mượn</th>
+                                <th>Mã sách</th>
+                                <th>Ngày mượn</th>
+                                <th>Hạn trả</th>
+                                <th>Chỉnh sửa</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookTable">
+                            <tr>
+                                <td>Vũ Nhật Thanh</td>
+                                <td>Web development 101</td>
+                                <td>9780977476077</td>
+                                <td>20/10/2024</td>
+                                <td>19/11/2024</td>
+                                <td class="edit-cell">
+                                    <button class="delete-button">Xóa</button>
+                                    <button class="return-button">Trả</button>
+                                </td>                                
+                            </tr>
+                            <tr>
+                                <td>Trịnh Trần Phương Tuấn</td>
+                                <td>101 cách bỏ con</td>
+                                <td>9788750272328</td>
+                                <td>01/08/2021</td>
+                                <td>07/02/2021</td>
+                                <td class="edit-cell">
+                                    <button class="delete-button">Xóa</button>
+                                    <button class="return-button">Trả</button>
+                                </td>   
+                            </tr>
+                            <tr>
+                                <td>Tên thử 1</td>
+                                <td>Sách thử 1</td>
+                                <td>9783034917941</td>
+                                <td>06/09/1969</td>
+                                <td>09/10/1969</td>
+                                <td class="edit-cell">
+                                    <button class="delete-button">Xóa</button>
+                                    <button class="return-button">Trả</button>
+                                </td>   
+                            </tr>
+                            <tr>
+                                <td>Tên thử 2</td>
+                                <td>Sách thử 2</td>
+                                <td>9783034917942</td>
+                                <td>06/09/1969</td>
+                                <td>09/10/1969</td>
+                                <td class="edit-cell">
+                                    <button class="delete-button">Xóa</button>
+                                    <button class="return-button">Trả</button>
+                                </td>   
+                            </tr>
+                            <tr>
+                                <td>Tên thử 3</td>
+                                <td>Sách thử 3</td>
+                                <td>9783034917943</td>
+                                <td>06/09/1969</td>
+                                <td>09/10/1969</td>
+                                <td class="edit-cell">
+                                    <button class="delete-button">Xóa</button>
+                                    <button class="return-button">Trả</button>
+                                </td>   
+                            </tr>
+                            <tr>
+                                <td>Tên thử 4</td>
+                                <td>Sách thử 4</td>
+                                <td>9783034917944</td>
+                                <td>06/09/1969</td>
+                                <td>09/10/1969</td>
+                                <td class="edit-cell">
+                                    <button class="delete-button">Xóa</button>
+                                    <button class="return-button">Trả</button>
+                                </td>   
+                            </tr>
+                            <tr>
+                                <td>Tên thử 5</td>
+                                <td>Sách thử 5</td>
+                                <td>9783034917945</td>
+                                <td>06/09/1969</td>
+                                <td>09/10/1969</td>
+                                <td class="edit-cell">
+                                    <button class="delete-button">Xóa</button>
+                                    <button class="return-button">Trả</button>
+                                </td>   
+                            </tr>
+                            <tr>
+                                <td>Tên thử 6</td>
+                                <td>Sách thử 6</td>
+                                <td>9783034917946</td>
+                                <td>06/09/1969</td>
+                                <td>09/10/1969</td>
+                                <td class="edit-cell">
+                                    <button class="delete-button">Xóa</button>
+                                    <button class="return-button">Trả</button>
+                                </td>   
+                            </tr>
+                            <tr>
+                                <td>Tên thử 7</td>
+                                <td>Sách thử 7</td>
+                                <td>9783034917947</td>
+                                <td>06/09/1969</td>
+                                <td>09/10/1969</td>
+                                <td class="edit-cell">
+                                    <button class="delete-button">Xóa</button>
+                                    <button class="return-button">Trả</button>
+                                </td>   
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-interactions">
+                    <input type="text" placeholder="ID người mượn">
+                    <input type="text" placeholder="Mã sách">
+                    <button>+ Thêm</button>
+                    <button id="edit-button" class="toggleable-button">Chỉnh sửa</button>
+                    <button id="save-button">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="overlay">
+    </div>
+    <script src="./js/layout.js"></script>
+    <script src="./js/muonsach.js"></script>
+</body>
+</html>

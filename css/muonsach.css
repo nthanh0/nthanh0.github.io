@@ -1,0 +1,199 @@
+.content {
+    display: flex;
+    margin: 0 4rem;
+    flex-direction: column;
+}
+
+.content h1 {
+    padding-bottom: 5rem;
+    color: #004AAD;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.table-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.table-group tr, 
+.table-group td, 
+.table-group th {
+    text-align: center;
+    border: 1px solid #ccc; 
+    padding: 0.5rem;
+}
+
+.table-interactions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.table-interactions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-interactions button, input {
+    height: 2.5rem;
+    border-radius: 5px;
+}
+
+.table-interactions button {
+    border: 1px solid black;
+    background: none;
+    cursor: pointer;
+}
+
+.table-interactions button:hover {
+    background-color: #e1e1e1;
+}
+
+.table-interactions button:active {
+    transition: all ease 0.1s;
+    border-color: #004AAD;
+    background-color: #004AAD;
+    color: white;
+}
+
+.table-group input {
+    min-width: 15rem;
+    outline: none;
+    border: none;
+    background-color: #f1f3f4;
+    border: #f1f3f4 2px solid;
+    text-align: center;
+}
+
+.table-group input:focus {
+    border: #c3c3c3 2px solid;
+}
+
+.table-group table {
+    border-collapse: separate;
+    border-spacing: 0;
+    user-select: contain;
+}
+
+.table-group table tr td:first-child,
+.table-group table tr th:first-child {
+    border-left: 1px solid #ccc;
+}
+
+table tr th {
+    border-top: 1px solid #ccc;
+}
+
+table tr:first-child th:first-child {
+    border-top-left-radius: 5px;
+}
+
+table tr:first-child th:last-child {
+    border-top-right-radius: 5px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 5px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 5px;
+}
+
+.table-group th {
+    background-color: #004aad;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+.table-group .table-container {
+    overflow-y: scroll;
+    max-height: 30rem;
+}
+
+.table-group table {
+    width: 100%;
+    user-select: text;
+}
+
+#bookTable tr:hover {
+    background-color: #e1e1e1;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+}
+
+.delete-button:hover {
+    background-color: darkred;
+}
+
+.return-button {
+    background-color: green;
+    color: white;
+    border: none;
+}
+
+.return-button:hover {
+    background-color: darkgreen;
+}
+
+.edit-cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.edit-cell button {
+    border-radius: 5px;
+    height: 2rem;
+    width: 2.6rem;
+}
+
+.edit-cell button:active {
+    background-color: white;
+}
+
+.edit-cell, #edit-header {
+    user-select: none;
+}
+
+.toggleable-button.active {
+    background-color: #004AAD;
+    border-color: #004AAD;
+    color: white;
+}
+
+.toggleable-button.active:hover {
+    background-color: #0066eb;
+}
+
+@media only screen and (max-width: 1180px) {
+    .content {
+        padding: 2rem 0;
+    }
+    .content h1 {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 624px) {
+    .table-interactions {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 542px) {
+    .content h1 {
+        font-size: 2rem;
+    }
+}
