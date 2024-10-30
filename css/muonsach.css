@@ -177,11 +177,13 @@ table tr:last-child td:last-child {
 }
 
 @media only screen and (max-width: 1180px) {
-    .content {
-        margin: 1rem;
-    }
     .content h1 {
         text-align: center;
+    }
+
+    .content {
+        padding: 2rem 0;
+        margin: 2rem;
     }
 }
 
