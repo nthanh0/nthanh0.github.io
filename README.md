@@ -9,7 +9,7 @@ Do Van Duc
 Hoặc vào thẳng https://nthanh0.github.io/Vũ%20Nhật%20Thanh(Quản%20lý%20mượn%20trả)/MuonTra.html nếu không muốn đăng nhập
 # Mượn sách
 Phần nhập nhập bất kì số nào vào ID và mã sách (chỉ để minh họa - không có csdl)  
-Thêm, xóa, chỉnh sửa cũng chỉ tạm thời và mất sau khi tải lại trangtrang
+Thêm, xóa, chỉnh sửa cũng chỉ tạm thời và mất sau khi tải lại trang
 # Kho sách
 # Thông tin độc giả
 Màu mè (đau mắt)
