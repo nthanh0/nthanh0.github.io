@@ -10,6 +10,7 @@ Hoặc vào thẳng https://nthanh0.github.io/Vũ%20Nhật%20Thanh(Quản%20lý%
 # Mượn sách
 Phần nhập nhập bất kì số nào vào ID và mã sách (chỉ để minh họa - không có csdl)  
 Thêm, xóa, chỉnh sửa cũng chỉ tạm thời và mất sau khi tải lại trang
+Bật nút chỉnh sửa thì có thể chỉnh sửa dữ liệu bảng như soạn văn bảnbản
 # Kho sách
 # Thông tin độc giả
 Màu mè (đau mắt)
