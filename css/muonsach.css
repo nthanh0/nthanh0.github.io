@@ -198,30 +198,3 @@ table tr:last-child td:last-child {
         border-color: #004AAD;
     }
 }
-
-@media screen and (-webkit-min-device-pixel-ratio: 1) {
-    html {
-      font-size: 100%;
-    }
-  }
-  
-  /* For 110-120% zoom */
-  @media screen and (-webkit-min-device-pixel-ratio: 1.1) {
-    html {
-      font-size: 91%;  /* 100/1.1 */
-    }
-  }
-  
-  /* For 125-140% zoom */
-  @media screen and (-webkit-min-device-pixel-ratio: 1.25) {
-    html {
-      font-size: 80%;  /* 100/1.25 */
-    }
-  }
-  
-  /* For 150% zoom */
-  @media screen and (-webkit-min-device-pixel-ratio: 1.5) {
-    html {
-      font-size: 66.67%;  /* 100/1.5 */
-    }
-  }

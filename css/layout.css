@@ -244,3 +244,9 @@ main {
         width: 40%;
     }
 }
+
+@media screen and (-webkit-min-device-pixel-ratio: 1.25) and (min-width: 1181px) {
+    html {
+        font-size: 80%; 
+    }
+}
