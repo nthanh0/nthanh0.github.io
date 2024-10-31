@@ -11,5 +11,6 @@ Hoặc vào thẳng https://nthanh0.github.io/Vũ%20Nhật%20Thanh(Quản%20lý%
 Phần nhập nhập bất kì số nào vào ID và mã sách (chỉ để minh họa - không có csdl)
 # Kho sách
 # Thông tin độc giả
+Màu mè (đau mắt)
 # Thống kê
 Biểu đồ ngẫu nhiên (minh họa)
