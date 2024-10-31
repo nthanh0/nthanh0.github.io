@@ -1,6 +1,5 @@
 # Phần mềm quản lý thư viện
 # site: https://nthanh0.github.io/index.html
-# Tài khoản/Mật khẩu
 # Tài khoản là 1 trong 4 tên
 Vu Nhat Thanh  
 Hoang Phu Dung  
