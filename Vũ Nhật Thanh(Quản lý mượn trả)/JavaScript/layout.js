@@ -57,19 +57,7 @@ function updateTime() {
 }
 updateTime();
 setInterval(updateTime, 1000);
-function setupLogout() {
-    const logoutButton = document.getElementById('log-out');
-    if (logoutButton) {
-        logoutButton.addEventListener('click', function(event) {
-            const confirmation = confirm('Bạn muốn đăng xuất không?');
-            if (confirmation) {
-                window.location.href = "../Hoàng Phú Dũng(Trang Đăng Nhập)/Login.html";
-            } else {
-                event.preventDefault();
-            }
-        });
-    }
-}
+
 // leave page confirmation
 
 window.addEventListener('beforeunload', e => e.preventDefault());
