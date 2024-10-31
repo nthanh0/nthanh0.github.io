@@ -1,165 +1,182 @@
 document.addEventListener("DOMContentLoaded", () => {
     const overdueButton = document.getElementById("overdue-toggle");
+    const historyButton = document.getElementById("history-toggle");
     const tableBody = document.getElementById("tableBody");
+    const editButton = document.getElementById("edit-button");
+    const saveButton = document.getElementById("save-button");
+    
     let normalRows = [];
     let overdueRows = [];
+    let historyRows = [];
+    let showingHistory = false;
+    let showingOverdue = false;
+    let isEditing = false;
 
-    // Function to convert DD/MM/YYYY to Date object
+    // Utility Functions
     const parseDate = (dateStr) => {
         const [day, month, year] = dateStr.split('/');
         return new Date(year, month - 1, day);
     };
 
-    // Function to calculate overdue fee
     const calculateFee = (dueDate) => {
         const today = new Date();
         const due = parseDate(dueDate);
         const diffTime = Math.abs(today - due);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        const fee = Math.min(diffDays * 5000, 100000);
-        return fee;
+        return Math.min(diffDays * 5000, 100000);
     };
 
-    // Function to check if a row is overdue
     const isOverdue = (row) => {
-        const dueDateCell = row.cells[4].textContent;
-        const dueDate = parseDate(dueDateCell);
+        const dueDate = parseDate(row.cells[4].textContent);
         return dueDate < new Date();
     };
 
-    // Function to format number with commas
     const formatNumber = (num) => {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
-    // Modify table header based on overdue status
-    const updateTableHeader = (showingOverdue) => {
+    // Table Management Functions
+    const updateTableHeader = (showingOverdue, showingHistory) => {
         const headerRow = document.querySelector("thead tr");
-        
-        // Remove fee column if exists
-        const feeHeader = headerRow.querySelector('th[data-type="fee"]');
-        if (feeHeader) {
-            feeHeader.remove();
-        }
+        headerRow.querySelectorAll('th[data-type]').forEach(th => th.remove());
 
-        // Add fee column for overdue list
-        if (showingOverdue) {
+        if (showingOverdue || showingHistory) {
             const feeHeader = document.createElement('th');
             feeHeader.setAttribute('data-type', 'fee');
             feeHeader.textContent = 'Phí trễ hạn';
             headerRow.insertBefore(feeHeader, headerRow.lastElementChild);
         }
+
+        if (showingHistory) {
+            const dateHeader = document.createElement('th');
+            dateHeader.setAttribute('data-type', 'return-date');
+            dateHeader.textContent = 'Ngày trả';
+            headerRow.insertBefore(dateHeader, headerRow.lastElementChild);
+        }
     };
 
-    // Separate rows into overdue and normal arrays
     const separateRows = () => {
         const rows = Array.from(tableBody.getElementsByTagName('tr'));
         normalRows = [];
         overdueRows = [];
         
         rows.forEach(row => {
+            const cleanRow = row.cloneNode(true);
+            
             if (isOverdue(row)) {
-                const overdueRow = row.cloneNode(true);
-                const fee = calculateFee(row.cells[4].textContent);
-                const feeCell = document.createElement('td');
-                feeCell.textContent = formatNumber(fee);
-                overdueRow.insertBefore(feeCell, overdueRow.lastElementChild);
-                overdueRows.push(overdueRow);
-                row.remove();
+                if (!cleanRow.querySelector('[data-type="fee"]')) {
+                    const fee = calculateFee(row.cells[4].textContent);
+                    const feeCell = document.createElement('td');
+                    feeCell.setAttribute('data-type', 'fee');
+                    feeCell.textContent = formatNumber(fee);
+                    cleanRow.insertBefore(feeCell, cleanRow.lastElementChild);
+                }
+                overdueRows.push(cleanRow);
             } else {
-                normalRows.push(row.cloneNode(true));
-                row.remove();
+                normalRows.push(cleanRow);
             }
+            row.remove();
         });
 
-        // Display normal rows by default
-        normalRows.forEach(row => {
-            tableBody.appendChild(row);
+        displayRows(normalRows);
+    };
+
+    const displayRows = (rows) => {
+        tableBody.innerHTML = '';
+        rows.forEach(row => {
+            const displayRow = row.cloneNode(true);
+            addRowEventListeners(displayRow);
+            tableBody.appendChild(displayRow);
         });
     };
 
-    // Initial separation
-    separateRows();
-
-    // Add event listeners to new rows
+    // Event Listeners Functions
     const addRowEventListeners = (row) => {
         const deleteButton = row.querySelector('.delete-button');
         const returnButton = row.querySelector('.return-button');
 
         if (deleteButton) {
-            deleteButton.addEventListener('click', () => {
-                const confirmDelete = confirm("Bạn có chắc chắn muốn xóa không?");
-                if (confirmDelete) {
-                    row.remove();
-                    normalRows = normalRows.filter(r => r !== row);
-                    overdueRows = overdueRows.filter(r => r !== row);
-                }
-            });
+            deleteButton.addEventListener('click', () => handleDelete(row));
         }
 
         if (returnButton) {
-            returnButton.addEventListener('click', () => {
-                const confirmReturn = confirm("Bạn có chắc chắn đã trả sách không?");
-                if (confirmReturn) {
-                    row.remove();
-                    normalRows = normalRows.filter(r => r !== row);
-                    overdueRows = overdueRows.filter(r => r !== row);
-                }
+            returnButton.addEventListener('click', () => handleReturn(row));
+        }
+    };
+
+    const handleDelete = (row) => {
+        if (confirm("Bạn có chắc chắn muốn xóa không?")) {
+            row.remove();
+            [normalRows, overdueRows, historyRows].forEach(array => {
+                const index = array.findIndex(r => r.isEqualNode(row));
+                if (index > -1) array.splice(index, 1);
             });
         }
     };
 
-    // Add event listeners to all initial rows
-    [...normalRows, ...overdueRows].forEach(row => {
-        addRowEventListeners(row);
-    });
+    const handleReturn = (row) => {
+        if (confirm("Bạn có chắc chắn đã trả sách không?")) {
+            const historyRow = row.cloneNode(true);
+            
+            // Clean up existing special cells
+            historyRow.querySelectorAll('[data-type]').forEach(cell => cell.remove());
+            
+            // Add fee
+            const fee = isOverdue(row) ? calculateFee(row.cells[4].textContent) : 0;
+            const feeCell = document.createElement('td');
+            feeCell.setAttribute('data-type', 'fee');
+            feeCell.textContent = formatNumber(fee);
+            
+            // Add return date
+            const returnDate = document.createElement('td');
+            returnDate.setAttribute('data-type', 'return-date');
+            returnDate.textContent = new Date().toLocaleDateString('en-GB');
+            
+            historyRow.insertBefore(feeCell, historyRow.lastElementChild);
+            historyRow.insertBefore(returnDate, historyRow.lastElementChild);
+            
+            const returnBtn = historyRow.querySelector('.return-button');
+            if (returnBtn) returnBtn.remove();
+            
+            historyRows.push(historyRow);
+            normalRows = normalRows.filter(r => !r.isEqualNode(row));
+            overdueRows = overdueRows.filter(r => !r.isEqualNode(row));
+            
+            row.remove();
+        }
+    };
 
-    // Toggle between normal and overdue lists
-    let showingOverdue = false;
+    // Button Event Listeners
     overdueButton.addEventListener('click', () => {
         showingOverdue = !showingOverdue;
         overdueButton.classList.toggle('active');
+        historyButton.classList.remove('active');
+        showingHistory = false;
         
-        // Update table header
-        updateTableHeader(showingOverdue);
-
-        // Clear the table
-        while (tableBody.firstChild) {
-            tableBody.removeChild(tableBody.firstChild);
-        }
-
-        // Show appropriate rows
-        if (showingOverdue) {
-            overdueRows.forEach(row => {
-                const newRow = row.cloneNode(true);
-                addRowEventListeners(newRow);
-                tableBody.appendChild(newRow);
-            });
-        } else {
-            normalRows.forEach(row => {
-                const newRow = row.cloneNode(true);
-                addRowEventListeners(newRow);
-                tableBody.appendChild(newRow);
-            });
-        }
+        updateTableHeader(showingOverdue, false);
+        displayRows(showingOverdue ? overdueRows : normalRows);
     });
 
-    // Modify your existing add function
-    const addButton = document.getElementById("add-button");
-    addButton.onclick = function() {
+    historyButton.addEventListener('click', () => {
+        showingHistory = !showingHistory;
+        historyButton.classList.toggle('active');
+        overdueButton.classList.remove('active');
+        showingOverdue = false;
+
+        updateTableHeader(false, showingHistory);
+        displayRows(showingHistory ? historyRows : normalRows);
+    });
+
+    // Add New Item Functionality
+    document.getElementById("add-button").onclick = function() {
         const borrowerID = document.getElementById("borrowerID-input").value.trim();
         const bookID = document.getElementById("bookID-input").value.trim();
 
-        if (borrowerID == "") {
-            alert("ID người mượn trống");
-            return;
-        } else if (isNaN(borrowerID)) {
+        if (!borrowerID || isNaN(borrowerID)) {
             alert("ID người mượn không hợp lệ");
             return;
-        } else if (bookID == "") {
-            alert("Mã sách trống");
-            return;
-        } else if (isNaN(bookID)) {
+        }
+        if (!bookID || isNaN(bookID)) {
             alert("Mã sách không hợp lệ");
             return;
         }
@@ -168,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
         row.innerHTML = `
             <td>Test Name</td>
             <td>Test Book</td>
-            <td>9783034917948</td>
+            <td>${bookID}</td>
             <td>${new Date().toLocaleDateString('en-GB')}</td>
             <td>${new Date(Date.now() + 30*24*60*60*1000).toLocaleDateString('en-GB')}</td>
             <td class="edit-cell">
@@ -177,101 +194,75 @@ document.addEventListener("DOMContentLoaded", () => {
             </td>
         `;
 
-        addRowEventListeners(row);
-        normalRows.push(row);
-
-        if (!showingOverdue) {
-            tableBody.appendChild(row.cloneNode(true));
+        normalRows.push(row.cloneNode(true));
+        if (!showingOverdue && !showingHistory) {
+            const displayRow = row.cloneNode(true);
+            addRowEventListeners(displayRow);
+            tableBody.appendChild(displayRow);
         }
     };
-    const editButton = document.getElementById("edit-button");
-    const saveButton = document.getElementById("save-button");
-    let isEditing = false;
 
-    // Function to make cells editable
-    function makeEditable(cell) {
-        if (!cell.classList.contains('edit-cell')) {  // Don't make the buttons column editable
-            cell.contentEditable = true;
-            cell.classList.add('editable');
-        }
-    }
-
-    // Function to make cells non-editable
-    function makeNonEditable(cell) {
-        cell.contentEditable = false;
-        cell.classList.remove('editable');
-    }
-
-    // Toggle edit mode
+    // Edit Functionality
     editButton.addEventListener('click', () => {
         isEditing = !isEditing;
         editButton.classList.toggle('active');
-        
-        // Show/hide save button
         saveButton.style.display = isEditing ? 'inline-block' : 'none';
         
-        // Get all cells
-        const cells = tableBody.getElementsByTagName('td');
-        
-        // Toggle editability for each cell
-        Array.from(cells).forEach(cell => {
-            if (isEditing) {
-                makeEditable(cell);
-            } else {
-                makeNonEditable(cell);
+        tableBody.querySelectorAll('td').forEach(cell => {
+            if (!cell.classList.contains('edit-cell')) {
+                cell.contentEditable = isEditing;
+                cell.classList.toggle('editable', isEditing);
+                if (isEditing) {
+                    cell.setAttribute('data-original', cell.textContent.trim());
+                }
             }
         });
     });
 
-    // Save changes
     saveButton.addEventListener('click', () => {
-        const confirmSave = confirm("Bạn có chắc chắn muốn lưu thay đổi không?");
-        if (confirmSave) {
-            // Turn off edit mode
+        if (confirm("Bạn có chắc chắn muốn lưu thay đổi không?")) {
             isEditing = false;
             editButton.classList.remove('active');
             saveButton.style.display = 'none';
             
-            // Make all cells non-editable
-            const cells = tableBody.getElementsByTagName('td');
-            Array.from(cells).forEach(cell => {
-                makeNonEditable(cell);
+            tableBody.querySelectorAll('td').forEach(cell => {
+                cell.contentEditable = false;
+                cell.classList.remove('editable');
             });
             
-            // Here you would typically save the changes to your backend
             alert("Đã lưu thay đổi!");
         }
     });
 
-    // Add validation for date format when editing
-    function addDateValidation(cell) {
-        cell.addEventListener('blur', () => {
-            if (cell.cellIndex === 3 || cell.cellIndex === 4) { // Date columns
-                const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/(19|20)\d\d$/;
-                if (!dateRegex.test(cell.textContent.trim())) {
-                    alert("Định dạng ngày không hợp lệ. Vui lòng sử dụng định dạng DD/MM/YYYY");
-                    cell.textContent = cell.getAttribute('data-original');
-                }
-            }
-        });
-    }
+    // Initialize
+    separateRows();
 
-    // Store original values when entering edit mode
-    function storeOriginalValues() {
-        const cells = tableBody.getElementsByTagName('td');
-        Array.from(cells).forEach(cell => {
-            cell.setAttribute('data-original', cell.textContent.trim());
-            if (cell.cellIndex === 3 || cell.cellIndex === 4) {
-                addDateValidation(cell);
-            }
-        });
-    }
-
-    // Modify the edit button click handler to store original values
-    editButton.addEventListener('click', () => {
-        if (!isEditing) {
-            storeOriginalValues();
+    // Search Functionality
+    const searchBar = document.getElementById("searchBar");
+    searchBar.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+        
+        // Determine which rows to search based on current view
+        let rowsToSearch = normalRows;
+        if (showingOverdue) {
+            rowsToSearch = overdueRows;
+        } else if (showingHistory) {
+            rowsToSearch = historyRows;
         }
-    });
 
+        // Filter rows based on search term
+        const filteredRows = rowsToSearch.filter(row => {
+            // Search across all text content in the row
+            const rowText = Array.from(row.cells)
+                .slice(0, -1) // Exclude the last cell (edit cell)
+                .map(cell => cell.textContent.toLowerCase())
+                .join(' ');
+            
+            return rowText.includes(searchTerm);
+        });
+
+        // Display filtered rows
+        displayRows(filteredRows);
+    });
+    
 });
