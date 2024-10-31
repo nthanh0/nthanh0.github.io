@@ -115,7 +115,7 @@ table tr:last-child td:last-child {
     user-select: text;
 }
 
-#bookTable tr:hover {
+#tableBody tr:hover {
     background-color: #e1e1e1;
 }
 

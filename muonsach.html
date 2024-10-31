@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv='cache-control' content='no-cache'>
     <meta http-equiv='expires' content='0'>
     <meta http-equiv='pragma' content='no-cache'>
@@ -66,11 +66,11 @@
             <div class="table-group">
                 <div class="table-interactions">
                     <input type="text" id="searchBar" placeholder="Tìm kiếm">
-                    <button class="toggleable-button">Đã quá hạn</button>
+                    <button class="toggleable-button" id="overdue-toggle">Đã quá hạn</button>
                     <button>Lịch sử mượn</button>
                 </div>
                 <div class="table-container">
-                    <table>
+                    <table id="table">
                         <thead>
                             <tr>
                                 <th>Người mượn</th>
@@ -81,7 +81,7 @@
                                 <th>Chỉnh sửa</th>
                             </tr>
                         </thead>
-                        <tbody id="bookTable">
+                        <tbody id="tableBody">
                             <tr>
                                 <td>Vũ Nhật Thanh</td>
                                 <td>Web development 101</td>
@@ -108,8 +108,8 @@
                                 <td>Tên thử 1</td>
                                 <td>Sách thử 1</td>
                                 <td>9783034917941</td>
-                                <td>06/09/1969</td>
-                                <td>09/10/1969</td>
+                                <td>31/10/2024</td>
+                                <td>30/11/2024</td>
                                 <td class="edit-cell">
                                     <button class="delete-button">Xóa</button>
                                     <button class="return-button">Trả</button>
@@ -119,8 +119,8 @@
                                 <td>Tên thử 2</td>
                                 <td>Sách thử 2</td>
                                 <td>9783034917942</td>
-                                <td>06/09/1969</td>
-                                <td>09/10/1969</td>
+                                <td>31/10/2024</td>
+                                <td>30/11/2024</td>
                                 <td class="edit-cell">
                                     <button class="delete-button">Xóa</button>
                                     <button class="return-button">Trả</button>
@@ -130,8 +130,8 @@
                                 <td>Tên thử 3</td>
                                 <td>Sách thử 3</td>
                                 <td>9783034917943</td>
-                                <td>06/09/1969</td>
-                                <td>09/10/1969</td>
+                                <td>31/10/2024</td>
+                                <td>30/11/2024</td>
                                 <td class="edit-cell">
                                     <button class="delete-button">Xóa</button>
                                     <button class="return-button">Trả</button>
@@ -141,8 +141,8 @@
                                 <td>Tên thử 4</td>
                                 <td>Sách thử 4</td>
                                 <td>9783034917944</td>
-                                <td>06/09/1969</td>
-                                <td>09/10/1969</td>
+                                <td>25/09/2024</td>
+                                <td>25/10/2024</td>
                                 <td class="edit-cell">
                                     <button class="delete-button">Xóa</button>
                                     <button class="return-button">Trả</button>
@@ -152,8 +152,8 @@
                                 <td>Tên thử 5</td>
                                 <td>Sách thử 5</td>
                                 <td>9783034917945</td>
-                                <td>06/09/1969</td>
-                                <td>09/10/1969</td>
+                                <td>20/09/2024</td>
+                                <td>20/10/2024</td>
                                 <td class="edit-cell">
                                     <button class="delete-button">Xóa</button>
                                     <button class="return-button">Trả</button>
@@ -163,8 +163,8 @@
                                 <td>Tên thử 6</td>
                                 <td>Sách thử 6</td>
                                 <td>9783034917946</td>
-                                <td>06/09/1969</td>
-                                <td>09/10/1969</td>
+                                <td>30/09/2024</td>
+                                <td>30/10/2024</td>
                                 <td class="edit-cell">
                                     <button class="delete-button">Xóa</button>
                                     <button class="return-button">Trả</button>
@@ -174,8 +174,8 @@
                                 <td>Tên thử 7</td>
                                 <td>Sách thử 7</td>
                                 <td>9783034917947</td>
-                                <td>06/09/1969</td>
-                                <td>09/10/1969</td>
+                                <td>31/10/2024</td>
+                                <td>30/11/2024</td>
                                 <td class="edit-cell">
                                     <button class="delete-button">Xóa</button>
                                     <button class="return-button">Trả</button>
@@ -185,9 +185,9 @@
                     </table>
                 </div>
                 <div class="table-interactions">
-                    <input type="text" placeholder="ID người mượn">
-                    <input type="text" placeholder="Mã sách">
-                    <button>+ Thêm</button>
+                    <input type="text" id="borrowerID-input" placeholder="ID người mượn">
+                    <input type="text" id="bookID-input" placeholder="Mã sách">
+                    <button id="add-button">+ Thêm</button>
                     <button id="edit-button" class="toggleable-button">Chỉnh sửa</button>
                     <button id="save-button">Lưu thay đổi</button>
                 </div>
