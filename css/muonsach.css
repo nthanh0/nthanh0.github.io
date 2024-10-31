@@ -35,17 +35,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid black;
+    background: none;
+    cursor: pointer;
 }
 
 .table-interactions button, input {
     height: 2.5rem;
     border-radius: 5px;
-}
-
-.table-interactions button {
-    border: 1px solid black;
-    background: none;
-    cursor: pointer;
 }
 
 .table-interactions button:hover {
@@ -183,7 +180,7 @@ table tr:last-child td:last-child {
 
     .content {
         padding: 2rem 0;
-        margin: 2rem;
+        margin: 1rem;
     }
 }
 
