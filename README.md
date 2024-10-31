@@ -6,4 +6,4 @@ Hoang Phu Dung
 Phan Cao Huy  
 Do Van Duc  
 # Mật khẩu: 123
-Hoặc vào thẳng https://nthanh0.github.io/V%C5%A9%20Nh%E1%BA%ADt%20Thanh%28Qu%E1%BA%A3n%20l%C3%BD%20m%C6%B0%E1%BB%A3n%20tr%E1%BA%A3%29/MuonTra.html nếu không muốn đăng nhậpnhập
+Hoặc vào thẳng [https://nthanh0.github.io/V%C5%A9%20Nh%E1%BA%ADt%20Thanh%28Qu%E1%BA%A3n%20l%C3%BD%20m%C6%B0%E1%BB%A3n%20tr%E1%BA%A3%29/MuonTra.html] nếu không muốn đăng nhập
