@@ -59,5 +59,5 @@ updateTime();
 setInterval(updateTime, 1000);
 
 // leave page confirmation
-window.addEventListener('beforeunload', e => e.preventDefault());
 
+window.addEventListener('beforeunload', e => e.preventDefault());

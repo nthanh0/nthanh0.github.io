@@ -2,10 +2,11 @@
     display: flex;
     margin: 0 4rem;
     flex-direction: column;
+    padding: 2rem 0;
+    gap: 5rem;
 }
 
 .content h1 {
-    padding-bottom: 5rem;
     color: #004AAD;
     font-weight: bold;
     font-size: 2.5rem;
@@ -45,15 +46,10 @@
     border-radius: 5px;
 }
 
-.table-interactions button:hover {
-    background-color: #e1e1e1;
-}
-
 .table-interactions button:active {
-    transition: all ease 0.1s;
-    border-color: #004AAD;
-    background-color: #004AAD;
+    transition: all ease 0.2s;
     color: white;
+    background-color: #e1e1e1;
 }
 
 .table-group input {
@@ -127,18 +123,10 @@ table tr:last-child td:last-child {
     border: none;
 }
 
-.delete-button:hover {
-    background-color: darkred;
-}
-
 .return-button {
     background-color: green;
     color: white;
     border: none;
-}
-
-.return-button:hover {
-    background-color: darkgreen;
 }
 
 .edit-cell {
@@ -169,18 +157,13 @@ table tr:last-child td:last-child {
     color: white;
 }
 
-.toggleable-button.active:hover {
-    background-color: #0066eb;
-}
-
 @media only screen and (max-width: 1180px) {
     .content h1 {
         text-align: center;
     }
-
+    
     .content {
-        padding: 2rem 0;
-        margin: 1rem;
+        margin: 0 1rem;
     }
 }
 
@@ -196,3 +179,49 @@ table tr:last-child td:last-child {
         font-size: 2rem;
     }
 }
+
+@media(hover: hover) and (pointer: fine) {
+    .table-interactions button:hover {
+        background-color: #e1e1e1;
+    }
+
+    .delete-button:hover {
+        background-color: darkred;
+    }
+
+    .return-button:hover {
+        background-color: darkgreen;
+    }
+
+    .toggleable-button.active:hover {
+        background-color: #004AAD;
+        border-color: #004AAD;
+    }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 1) {
+    html {
+      font-size: 100%;
+    }
+  }
+  
+  /* For 110-120% zoom */
+  @media screen and (-webkit-min-device-pixel-ratio: 1.1) {
+    html {
+      font-size: 91%;  /* 100/1.1 */
+    }
+  }
+  
+  /* For 125-140% zoom */
+  @media screen and (-webkit-min-device-pixel-ratio: 1.25) {
+    html {
+      font-size: 80%;  /* 100/1.25 */
+    }
+  }
+  
+  /* For 150% zoom */
+  @media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+    html {
+      font-size: 66.67%;  /* 100/1.5 */
+    }
+  }
