@@ -251,4 +251,3 @@ document.getElementById('toggleInputBtn').addEventListener('click', function() {
     }
 });
 
-window.addEventListener('beforeunload', e => e.preventDefault());
