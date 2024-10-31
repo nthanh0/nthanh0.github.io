@@ -59,5 +59,21 @@ updateTime();
 setInterval(updateTime, 1000);
 
 // leave page confirmation
-
 window.addEventListener('beforeunload', e => e.preventDefault());
+
+// Log out
+function setupLogout() {
+    const logoutButton = document.getElementById('log-out');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function(event) {
+            const confirmation = confirm('Bạn muốn đăng xuất không?');
+            if (confirmation) {
+                window.location.href = "../../index.html";
+            } else {
+                event.preventDefault();
+            }
+        });
+    }
+}
+document.addEventListener('DOMContentLoaded', setupLogout);
+

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./CSS/layout.css" />
+    <link rel="shortcut icon" href="../Image/logo.jpg" type="image/x-icon">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./CSS/huy'sstyle.css" />
+    <title>Quản lý kho sách</title>
+  </head>
+  <body>
+    <div id="sidebar"> 
+        <div class="logo">
+            <img src="../Images/logo.jpg" alt="Library logo"/>
+            <p>MY LIBRARY</p>
+        </div>   
+        <ul>
+            <li><a href="../Đỗ Văn Đức(Quản lý kho sách)/KhoSach.html" class="quan-ly-kho-sach">Quản lý kho sách
+            </a></li>
+            <li><a href="#" class="quan-ly-doc-gia" id="current-page">Quản lý độc giả
+            </a></li>
+            <li><a href="../Vũ Nhật Thanh(Quản lý mượn trả)/MuonTra.html" class="quan-ly-muon-tra">Quản lý mượn / trả sách
+            </a></li>
+            <li><a href="../Đỗ Văn Đức(Quản lí thống kê)/ThongKe.html" class="quan-ly-thong-ke">Quản lý thống kê
+            </a></li>
+        </ul>
+        <div class="exit">
+            <a href="">
+                <i class="bi bi-box-arrow-left"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                </svg>
+                <p>Thoát</p>
+            </a>
+        </div>
+    </div> 
+    <main>
+      <div class="header">
+        <button type="button" class="toggleButton" onclick="toggleMenu()">
+          <i class="bi bi-list"></i>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            fill="currentColor"
+            class="bi bi-list"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+            />
+          </svg>
+        </button>
+        <div class="time">
+          <p id="time"></p>
+        </div>
+        <div class="log-out" id="log-out" onclick="Logout()">
+          <p>Đăng xuất
+              <i class="bi bi-box-arrow-left"></i>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                  <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+              </svg>
+          </p>
+      </div>
+        <img src="../Images/avatar.jpg" alt="Avatar" />
+      </div>
+      <div class="content">
+        <div class="container">
+          <header>
+            <h1 class="text-center my-4">Quản lý độc giả</h1>
+          </header>
+
+          <div class="row mb-3">
+            <div class="col">
+              <div class="dropdown">
+                <button
+                  class="btn btn-primary dropdown-toggle"
+                  type="button"
+                  id="sortDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Sắp xếp
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      onclick="sortReaders('name')"
+                      >Theo tên</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      onclick="sortReaders('registrationDate')"
+                      >Theo ngày đăng ký</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      onclick="sortReaders('duration')"
+                      >Theo thời gian sử dụng</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="searchInput"
+                  placeholder="Tìm kiếm..."
+                />
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  onclick="searchReaders()"
+                >
+                  Tìm
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="spacetable">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="stt">STT</th>
+                  <th>Mã</th>
+                  <th>Họ và Tên</th>
+                  <th>Giới tính</th>
+                  <th>SĐT/Email</th>
+                  <th>Ngày đăng ký</th>
+                  <th>Ngày hết hạn</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="readerTableBody"></tbody>
+            </table>
+          </div>
+          <div class="text-end mb-3">
+            <button class="btn btn-primary" onclick="showAddReaderModal()">
+              Thêm độc giả
+            </button>
+          </div>
+
+          <!-- Modal thêm/sửa độc giả -->
+          <div
+            class="modal fade"
+            id="readerModal"
+            tabindex="-1"
+            aria-labelledby="readerModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="readerModalLabel">
+                    Thêm độc giả mới
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form id="readerForm" onsubmit="return validateForm()">
+                    <input type="hidden" id="readerId" />
+                    <div class="mb-3">
+                      <label for="readerCode" class="form-label"
+                        >Mã độc giả</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="readerCode"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="readerName" class="form-label"
+                        >Họ và Tên</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="readerName"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="readerGender" class="form-label"
+                        >Giới tính</label
+                      >
+                      <select class="form-select" id="readerGender" required>
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="readerContact" class="form-label"
+                        >SĐT/Email</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="readerContact"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="registrationDate" class="form-label"
+                        >Ngày đăng ký</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="registrationDate"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="expirationDate" class="form-label"
+                        >Ngày hết hạn</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="expirationDate"
+                        required
+                      />
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Đóng
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="saveReader()"
+                    onclick="validForm();">
+                    Lưu
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.js"></script>
+      <script src="./JavaScript/huy'sscripts.js"></script>
+    </main>
+    <div class="overlay"></div>
+    <script src="./JavaScript/layout.js"></script>
+  </body>
+</html>

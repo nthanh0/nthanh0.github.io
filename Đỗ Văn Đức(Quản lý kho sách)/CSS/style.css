@@ -1,0 +1,12 @@
+.funcContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.heading{
+    margin: 10px 20px;
+}
+.funcContainer div{
+    flex-grow: 2;
+}

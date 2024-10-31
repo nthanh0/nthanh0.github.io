@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./CSS/layout.css">
+        <link rel="stylesheet" href="./CSS/search.css">
+        <link rel="stylesheet" href="./CSS/sort.css">
+        <link rel="stylesheet" href="./CSS/edit-mode.css">
+        <link rel="stylesheet" href="./CSS/table.css">
+        <link rel="stylesheet" href="./CSS/addbook.css">
+        <link rel="stylesheet" href="./CSS/style.css">
+        <link rel="shortcut icon" href="../Images/logo.jpg" type="image/x-icon">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css'>
+        <title>Quản lý kho sách</title>
+    </head>
+<body>  
+    <div id="sidebar"> 
+        <div class="logo">
+            <img src="../Images/logo.jpg" alt="Library logo"/>
+            <p>MY LIBRARY</p>
+        </div>   
+        <ul>
+            <li><a href="#" class="quan-ly-kho-sach" id="current-page">Quản lý kho sách
+            </a></li>
+            <li><a href="../Phan Cao Huy(Quản lý độc giả)/DocGia.html" class="quan-ly-doc-gia">Quản lý độc giả
+            </a></li>
+            <li><a href="../Vũ Nhật Thanh(Quản lý mượn trả)/MuonTra.html" class="quan-ly-muon-tra">Quản lý mượn / trả sách
+            </a></li>
+            <li><a href="../Đỗ Văn Đức(Quản lí thống kê)/ThongKe.html" class="quan-ly-thong-ke">Quản lý thống kê
+            </a></li>
+        </ul>
+        <div class="exit">
+            <a href="">
+                <i class="bi bi-box-arrow-left"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                </svg>
+                <p>Thoát</p>
+            </a>
+        </div>
+    </div> 
+    <main>       
+        <div class="header">
+            <button type="button" class="toggleButton" onclick="toggleMenu()">
+                <i class="bi bi-list"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </button>
+            <div class="time">
+                <p id="time"></p>
+            </div>
+            <div class="log-out" id="log-out" onclick="Logout()">
+                <p>Đăng xuất
+                    <i class="bi bi-box-arrow-left"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                        <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                    </svg>
+                </p>
+            </div>
+            <img src="../Images/avatar.jpg" alt="Avatar">
+        </div> 
+        <div class="content">
+            <div class="heading">
+                <h2>THÔNG TIN SÁCH TRONG THƯ VIỆN</h2>
+            </div>
+                <div class="funcContainer">
+                    <div class="search-bar">
+                        <input class="cols-12 search-input" id="searchBar" type="text" placeholder="Nhập từ khóa...">
+                    </div>
+                    <div class="sort-bar">
+                        <button class="cols-12 sort-btn">Sắp xếp</button>
+                        <div class=" cols-12 sort-bar-content">
+                            <ul class="">
+                                <li class="">
+                                    <button class="button1">Theo số lượng giảm dần</button>
+                                </li>
+                                <li class="">
+                                    <button class="button2">Theo số lượng giảm dần</button>
+                                </li>
+                                <li class="">
+                                    <button class="button3">Theo tên sách (A-Z)</button>
+                                </li>
+                                <li class="">
+                                    <button class="button4">Theo tên sách (Z-A)</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="edit-bar">
+                        <button id="editModeBtn" class="editMode-btn">Chỉnh sửa</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="bookTable">
+                        <thead>
+                            <tr>
+                                <th class="cols-title delete-column">Chỉnh sửa</th>
+                                <th class="cols-title">Mã sách</th>
+                                <th class="cols-title">Tên sách</th>
+                                <th class="cols-title">Tên tác giả</th>
+                                <th class="cols-title">Thể loại</th>
+                                <th class="cols-title">Ngày nhập</th>
+                                <th class="cols-title">Giá nhập</th>
+                                <th class="cols-title">Số lượng</th> 
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div>  
+                    <button id="toggleInputBtn" class="toggle-input-btn">
+                        <i class="fas fa-plus"></i>Thêm sách
+                    </button>
+                </div>
+                <div class="cols-1 input-group" style="display: none;">
+                    <div class="heading">
+                        <h2>THÊM SÁCH</h2>
+                    </div>
+                    <form class="input-group-child" id="addBookForm" novalidate>
+                        <input class="cols-10" type="text" id="bookId" name="bookId" placeholder="Mã" 
+                               pattern="^[A-Za-z0-9]{3,10}$" required
+                               maxlength="10" 
+                               oninput="this.value = this.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 10)">
+                        <div class="error-message" id="bookIdError"></div>
+                    
+                        <input class="cols-10" type="text" id="bookName" name="bookName" placeholder="Tên sách"
+                               minlength="2" maxlength="100" required
+                               oninput="this.value = this.value.slice(0, 100)">
+                        <div class="error-message" id="bookNameError"></div>
+                    
+                        <input class="cols-10" type="text" id="author" name="author" placeholder="Tác giả"
+                               minlength="2" maxlength="50" required
+                               oninput="this.value = this.value.replace(/[^A-Za-zÀ-ỹ\s]/g, '').slice(0, 50)">
+                        <div class="error-message" id="authorError"></div>
+                    
+                        <input class="cols-10" type="text" id="genre" name="genre" placeholder="Thể loại"
+                               required maxlength="30"
+                               oninput="this.value = this.value.replace(/[^A-Za-zÀ-ỹ\s]/g, '').slice(0, 30)">
+                        <div class="error-message" id="genreError"></div>
+                    
+                        <input class="cols-10" type="date" id="dateAdded" name="dateAdded" required>
+                        <div class="error-message" id="dateError"></div>
+                    
+                        <input class="cols-10" type="number" id="price" name="price" placeholder="Giá nhập"
+                               min="0" max="999999999" step="1000" required
+                               oninput="this.value = this.value.slice(0, 9)">
+                        <div class="error-message" id="priceError"></div>
+                    
+                        <input class="cols-10" type="number" id="quantity" name="quantity" placeholder="SL"
+                               min="1" max="1000" required
+                               oninput="this.value = this.value.slice(0, 4)">
+                        <div class="error-message" id="quantityError"></div>
+                    
+                        <button type="submit" class="cols-3 submit-btn">Thêm sách</button>
+                    </form>
+                </div>
+            </div>        
+        </div>
+    </main>
+    <div class="overlay">
+    </div>
+    <script src="./JavaScript/function.js"></script>
+    <script src="./JavaScript/index.js"></script>
+</body>
+</html>

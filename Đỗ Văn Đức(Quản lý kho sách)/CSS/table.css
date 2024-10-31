@@ -1,0 +1,35 @@
+.table-container{
+    display: flex;
+    margin: 0 auto;
+    overflow: scroll;
+    position: relative;
+    width: 96%;
+    height: 60vh;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th{
+    background-color: #65a6fa;
+    height: 50px;
+    top: -1px;
+    border: 1px solid black;
+    color: #333333;
+    position: sticky;
+}
+.cols-title{
+    height: 50px;
+    border: 1px solid black;
+    text-align: center;
+}
+.cols-value{
+    border: 1px solid black;
+    margin: 0;
+    height: 50px;
+    text-align: center;
+}
+.delete-column{
+    display: none;
+    width: 108px;
+}

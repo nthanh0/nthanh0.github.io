@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang đăng nhập</title>
+  <link rel="shortcut icon" href="../Images/logo.jpg" type="image/x-icon">
+  <link rel="stylesheet" href="./Hoàng Phú Dũng(Trang Đăng Nhập)/Login.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <div class="logo">
+        <img src="../Images/logo.jpg" alt="My library">
+      </div>
+      <form id="loginForm" onsubmit="return submitLogin()">
+        <input type="text" id="username" name="username" placeholder="Tên đăng nhập" required>
+        <input type="password" id="password" name="password" placeholder="Mật khẩu" required>
+        <div class="show-password">
+          <input type="checkbox" name="show-pw" id="show-pw">
+          <label for="show-pw">Hiển thị</label>
+        </div>
+        <button type="submit"><span>Đăng nhập</span></button>
+      </form>
+    </div>
+  </div>
+  <script src="./Hoàng Phú Dũng(Trang Đăng Nhập)/Login.js"></script>
+</body>
+</html>   
