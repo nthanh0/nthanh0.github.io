@@ -13,4 +13,4 @@ Phần nhập nhập bất kì số nào vào ID và mã sách (chỉ để minh
 # Thông tin độc giả
 Màu mè (đau mắt)
 # Thống kê
-Biểu đồ ngẫu nhiên (minh họa)
+Biểu đồ ngẫu nhiên (minh họa - không có csdlcsdl)
