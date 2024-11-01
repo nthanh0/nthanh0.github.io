@@ -92,16 +92,16 @@ document.addEventListener('DOMContentLoaded', function() {
     sortButtons.forEach(button => {
         button.addEventListener('click', function() {
             switch (this.className) {
-                case 'cols-12 button1':
+                case 'button1':
                     currentSortMethod = (a, b) => b.quantity - a.quantity;
                     break;
-                case 'cols-12 button2':
+                case 'button2':
                     currentSortMethod = (a, b) => a.quantity - b.quantity;
                     break;
-                case 'cols-12 button3':
+                case 'button3':
                     currentSortMethod = (a, b) => a.title.localeCompare(b.title);
                     break;
-                case 'cols-12 button4':
+                case 'button4':
                     currentSortMethod = (a, b) => b.title.localeCompare(a.title);
                     break;
             }
@@ -250,4 +250,3 @@ document.getElementById('toggleInputBtn').addEventListener('click', function() {
         this.innerHTML = '<i class="fas fa-plus"></i> Thêm sách';
     }
 });
-
