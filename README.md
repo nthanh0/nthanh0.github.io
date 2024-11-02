@@ -13,6 +13,5 @@ Thêm, xóa, chỉnh sửa cũng chỉ tạm thời và mất sau khi tải lạ
 Bật nút chỉnh sửa thì có thể chỉnh sửa dữ liệu bảng như soạn văn bản
 ## Kho sách
 ## Thông tin độc giả
-Màu mè (đau mắt)
 ## Thống kê
 Biểu đồ ngẫu nhiên (minh họa - không có csdl)
